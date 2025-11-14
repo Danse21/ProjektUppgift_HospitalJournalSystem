@@ -7,13 +7,13 @@ CREATE TABLE Patients (
     PatientID INT PRIMARY KEY AUTO_INCREMENT,
     FirstName VARCHAR (50) NOT NULL,
     LastName VARCHAR (50) NOT NULL,
-    Email VARCHAR (100) UNIQUE NOT NULL,
+    Email VARCHAR (100) UNIQUE NOT NULL
 );
 
 -- Create Appointments table
 CREATE TABLE Appointments (
     AppointmentID INT PRIMARY KEY AUTO_INCREMENT,
-    Appointment_date TIMESTAMP NOT NULL,
+    Appointment_date TIMESTAMP NOT NULL,        -- Change to datetime datatype
     PatientID INT NOT NULL,
     FOREIGN KEY (PatientID) REFERENCES Patients (PatientID)
 );
@@ -80,5 +80,5 @@ INSERT INTO Patients (PatientID, FirstName, LastName, Email) VALUES
 (4, 'Standford', 'Rought', 'standford.rought@kalixhospital.org', 'Cardiology'),
 (5, 'Judi', 'Jakobssen', 'judi.jakobssen@kalixhospital.org', 'General_practice'),
 (6, 'Krysta', 'Klimschak', 'krysta.klimschak@kalixhospital.org', 'General_surgery'),
-(7, 'Celie', 'Cheverton', 'celie.cheverton@kalixhospital.org', 'General_practice')
+(7, 'Celie', 'Cheverton', 'celie.cheverton@kalixhospital.org', 'General_practice'),
 (8, 'Odey', 'Shackle', 'odey.shackle@kalixhospital.org', 'Anaesthetics');
