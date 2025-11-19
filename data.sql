@@ -37,3 +37,17 @@ INSERT INTO Patients (PatientID, FirstName, LastName, Email) VALUES
 (6, 'Krysta', 'Klimschak', 'krysta.klimschak@kalixhospital.org', 'General_surgery'),
 (7, 'Celie', 'Cheverton', 'celie.cheverton@kalixhospital.org', 'General_practice'),
 (8, 'Odey', 'Shackle', 'odey.shackle@kalixhospital.org', 'Anaesthetics');
+
+INSERT INTO Appointments (AppointmentID, PatientID, Appointment_date) VALUES
+(1, 12, '2025-02-20'),
+(2, 7, '2025-09-23'),
+(3, 17, '2025-10-03'),
+(4, 13, '2025-10-03'),
+(5, 20, '2025-04-16');
+
+INSERT INTO JournalData (PatientID, DoctorID, Creation_date) VALUES
+(7, 1, '2025-10-07'),
+(12, 1, '2025-11-10'),
+(13, 4, '2025-11-23'),
+(17, 1, '2025-10-14'),
+(20, 2, '2025-10-23');
