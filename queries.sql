@@ -45,6 +45,42 @@ FROM Doctors WHERE Speciality = 'General_practice';
 
 SELECT * FROM Doctor_speciality;
 
+
 -- Rapport som använder HAVING
--- List the top 10 patients
-SELECT  
+-- Count and display how many journal data were created by each doctor, with the most on top
+SELECT d.DoctorID, CONCAT(d.FirstName, ' ', d.LastName) AS Doctor_name, COUNT(j.DoctorID) AS JournalCount
+FROM JournalData AS j
+INNER JOIN Doctors AS d ON j.DoctorID = d.DoctorID
+GROUP BY d.DoctorID, d.FirstName, d.LastName
+HAVING COUNT(j.DoctorID) > 0
+ORDER BY JournalCount DESC;
+
+
+En boolesk / CASE-etikett
+-- Display a comment showing how urgent a patient needs to see a doctor depending on the doctor's speciality
+SELECT DoctorID, Speciality,
+CASE
+	WHEN Speciality = 'General_practice' THEN 'You have been placed on queue'
+    WHEN Speciality = 'General_surgery' THEN 'Wait until evening to see a Doctor'
+    WHEN Speciality = 'Cardiology' THEN 'The Doctor will be with you in a short time'
+    WHEN Speciality = 'Anaesthetics' THEN 'Let me call the Doctor'
+    ELSE 'Get a two weeks rest'
+END AS UrgencyComment
+FROM Doctors;
+
+
+-- Stored Procedure
+-- Create an SQL stored procedure that can be used to query the database to get total journal entries per doctor
+ DELIMITER //
+ CREATE PROCEDURE TotalDoctorEntries()
+ BEGIN
+ SELECT d.DoctorID, CONCAT(d.FirstName, ' ', d.LastName) AS Doctor_name, d.Speciality,
+ COUNT(j.DoctorID) AS TotalEntries
+ FROM Doctors AS d
+ LEFT JOIN JournalData AS j ON d.DoctorID = j.DoctorID
+ GROUP BY d.DoctorID, d.FirstName, d.LastName
+ ORDER BY TotalEntries DESC;
+ END //
+DELIMITER ; 
+ 
+ CALL TotalDoctorEntries;
