@@ -1,4 +1,4 @@
--- Create Users (Patients)
+-- Create Users data input
 
 INSERT INTO Patients (PatientID, FirstName, LastName, Email) VALUES
  (1, 'Olga', 'Andreoletti', 'olga@example.com'),
@@ -43,7 +43,12 @@ INSERT INTO Appointments (AppointmentID, PatientID, Appointment_date) VALUES
 (2, 7, '2025-09-23'),
 (3, 17, '2025-10-03'),
 (4, 13, '2025-10-03'),
-(5, 20, '2025-04-16');
+(5, 20, '2025-04-16'),
+(6, 13, '2025-12-19'),
+(7, 13, '2025-11-15'),
+(8, 17, '2025-12-02'),
+(9, 7, '2025-11-23'),
+(10, 7, '2025-12-09');
 
 INSERT INTO JournalData (PatientID, DoctorID, Creation_date) VALUES
 (7, 1, '2025-10-07'),
@@ -51,3 +56,9 @@ INSERT INTO JournalData (PatientID, DoctorID, Creation_date) VALUES
 (13, 4, '2025-11-23'),
 (17, 1, '2025-10-14'),
 (20, 2, '2025-10-23');
+
+INSERT INTO Treatments (PatientID, DoctorID) VALUES
+(7, 1,),
+(12, 1),
+(17, 1),
+(20, 2,);

@@ -84,3 +84,44 @@ FROM Doctors;
 DELIMITER ; 
  
  CALL TotalDoctorEntries;
+
+
+ -- Vyer
+ -- 1. En rapportvy: Journal entries for patients visit
+CREATE VIEW PatientJournalView AS
+SELECT p.PatientID, CONCAT(p.FirstName, ' ', p.LastName) AS Patient_name, j.Creation_date, d.Speciality
+FROM JournalData j
+LEFT JOIN Patients p ON p.PatientID = j.PatientID
+LEFT JOIN Doctors d ON d.DoctorID = j.DoctorID
+ORDER BY Creation_date;
+
+
+SELECT * FROM PatientJournalView;       -- Display VIEW table
+
+
+-- 2. A simple VIEW that simplifies SELECT query
+CREATE VIEW SimpleJournalView AS
+SELECT CONCAT(p.FirstName, ' ', p.LastName) AS Patient_name, CONCAT(d.FirstName, ' ', d.LastName) AS Doctor_name, j.Creation_date
+FROM JournalData j
+INNER JOIN Patients AS p ON j.PatientID = p.PatientID
+INNER JOIN Doctors AS d ON j.DoctorID = d.DoctorID;
+
+
+SELECT * FROM PatientJournalView;       -- Display VIEW table
+
+
+-- -- En rapport med HAVING T.ex., Patients with more than one appointment
+SELECT p.PatientID,  CONCAT(p.FirstName, ' ', p.LastName) AS Patient_name,
+COUNT(a.PatientID) AS NumberOfAppointments
+FROM Patients AS p
+LEFT JOIN Appointments AS a ON p.PatientID = a.PatientID
+GROUP BY p.PatientID, p.FirstName, p.LastName
+HAVING COUNT(a.PatientID) > 1;
+
+
+-- Minst ett index på en kolumn som ofta söks på --> Patients ID and names (First- and LastName)
+-- Short motivation: These columns are indexed because they are frequently used to check if a patient's information already exists in the Hospital record.
+CREATE INDEX idx_pIdentification
+ON Patients (PatientID, LastName, FirstName);
+
+SHOW INDEX FROM Patients;
