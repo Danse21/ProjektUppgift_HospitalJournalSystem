@@ -39,7 +39,7 @@ CREATE TABLE JournalData (
     FOREIGN KEY (DoctorID) REFERENCES Doctors (DoctorID)
 );
 
--- Create Treatment table
+-- Create Treatments table
 CREATE TABLE Treatments (
     PatientID INT,
     DoctorID INT,
