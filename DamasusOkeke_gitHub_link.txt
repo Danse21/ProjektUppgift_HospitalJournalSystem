@@ -1,0 +1,8 @@
+
+
+Databaser och Informationstrukturer project by Damasus Okeke
+
+Project title: HospitalJournalSystem database.
+
+
+GitHub Link: https://github.com/Danse21/ProjektUppgift_HospitalJournalSystem
