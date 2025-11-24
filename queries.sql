@@ -30,20 +30,20 @@ SELECT * FROM Doctors
 WHERE FirstName LIKE "Ja%" OR LastName LIKE "Ja%";
 
 -- En JOIN som innefattar minst tre tabeller (Patients, Doctors och JournalData)
--- Display patients' firstName, lastName, and Email, Doctors' ID and Speciality as well as JournalData creation_date
-SELECT CONCAT(p.FirstName, ' ', p.LastName) AS Patient_name, p.Email, d.DoctorID, CONCAT(d.FirstName, ' ', d.LastName) AS Doctor_name, d.Speciality, j.Creation_date
+-- Display patients' firstName, lastName, and Email, Doctors' ID and Specialty as well as JournalData creation_date
+SELECT CONCAT(p.FirstName, ' ', p.LastName) AS Patient_name, p.Email, d.DoctorID, CONCAT(d.FirstName, ' ', d.LastName) AS Doctor_name, d.Specialty, j.Creation_date
 FROM JournalData AS j 
 LEFT JOIN Patients AS p ON j.PatientID = p.PatientID
 LEFT JOIN Doctors AS d ON j.DoctorID = d.DoctorID
 ORDER BY Patient_name;
 
 -- Skapa en View
--- Create a view of all Doctors with general practice speciality
-CREATE VIEW Doctor_speciality AS
-SELECT CONCAT(FirstName, ' ', LastName) AS Doctor_name, Speciality
-FROM Doctors WHERE Speciality = 'General_practice';
+-- Create a view of all Doctors with general practice specialty
+CREATE VIEW Doctor_specialty AS
+SELECT CONCAT(FirstName, ' ', LastName) AS Doctor_name, Specialty
+FROM Doctors WHERE Specialty = 'General_practice';
 
-SELECT * FROM Doctor_speciality;
+SELECT * FROM Doctor_specialty;
 
 
 -- Rapport som använder HAVING
@@ -57,13 +57,13 @@ ORDER BY JournalCount DESC;
 
 
 En boolesk / CASE-etikett
--- Display a comment showing how urgent a patient needs to see a doctor depending on the doctor's speciality
-SELECT DoctorID, Speciality,
+-- Display a comment showing how urgent a patient needs to see a doctor depending on the doctor's specialty
+SELECT DoctorID, Specialty,
 CASE
-	WHEN Speciality = 'General_practice' THEN 'You have been placed on queue'
-    WHEN Speciality = 'General_surgery' THEN 'Wait until evening to see a Doctor'
-    WHEN Speciality = 'Cardiology' THEN 'The Doctor will be with you in a short time'
-    WHEN Speciality = 'Anaesthetics' THEN 'Let me call the Doctor'
+	WHEN Specialty = 'General_practice' THEN 'You have been placed on queue'
+    WHEN Specialty = 'General_surgery' THEN 'Wait until evening to see a Doctor'
+    WHEN Specialty = 'Cardiology' THEN 'The Doctor will be with you in a short time'
+    WHEN Specialty = 'Anaesthetics' THEN 'Let me call the Doctor'
     ELSE 'Get a two weeks rest'
 END AS UrgencyComment
 FROM Doctors;
@@ -74,7 +74,7 @@ FROM Doctors;
  DELIMITER //
  CREATE PROCEDURE TotalDoctorEntries()
  BEGIN
- SELECT d.DoctorID, CONCAT(d.FirstName, ' ', d.LastName) AS Doctor_name, d.Speciality,
+ SELECT d.DoctorID, CONCAT(d.FirstName, ' ', d.LastName) AS Doctor_name, d.Specialty,
  COUNT(j.DoctorID) AS TotalEntries
  FROM Doctors AS d
  LEFT JOIN JournalData AS j ON d.DoctorID = j.DoctorID
@@ -89,7 +89,7 @@ DELIMITER ;
  -- Vyer
  -- 1. En rapportvy: Journal entries for patients visit
 CREATE VIEW PatientJournalView AS
-SELECT p.PatientID, CONCAT(p.FirstName, ' ', p.LastName) AS Patient_name, j.Creation_date, d.Speciality
+SELECT p.PatientID, CONCAT(p.FirstName, ' ', p.LastName) AS Patient_name, j.Creation_date, d.Specialty
 FROM JournalData j
 LEFT JOIN Patients p ON p.PatientID = j.PatientID
 LEFT JOIN Doctors d ON d.DoctorID = j.DoctorID

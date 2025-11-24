@@ -28,7 +28,7 @@ INSERT INTO Patients (PatientID, FirstName, LastName, Email) VALUES
  (25, 'Perrine', 'Revan', 'perrine@example.com');
 
 
- INSERT INTO Doctors (DoctorID, FirstName, LastName, Email, Speciality) VALUES
+ INSERT INTO Doctors (DoctorID, FirstName, LastName, Email, Specialty) VALUES
 (1, 'Royal', 'Grahlman', 'royal.grahlman@kalixhospital.org', 'General_practice'),
 (2, 'Jarrett', 'Daulton', 'jarrett.daulton@kalixhospital.org', 'General_surgery'),
 (3, 'Mandi', 'Piatto', 'mandi.piatto2@kalixhospital.org', 'General_practice'),

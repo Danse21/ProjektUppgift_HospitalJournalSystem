@@ -25,7 +25,7 @@ CREATE TABLE Doctors (
     FirstName VARCHAR (50) NOT NULL,
     LastName VARCHAR (50) NOT NULL,
     Email VARCHAR (100) UNIQUE NOT NULL,
-    Speciality VARCHAR (50) NOT NULL
+    Specialty VARCHAR (50) NOT NULL
 );
 
 -- Create JournalData table
