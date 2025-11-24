@@ -6,7 +6,8 @@ All Primary and Foreign Keys are clearly indicated on each of the tables, someti
 HospitalJournalSystem database represents patients record (or Journal entries) in a hospital. The database is designed to handle information about patients' planned hospital visit and treatment, and is made up of 4 distinct tables; `Patients,` `Doctors,` `Appointments,` and `JournalData.`
 The `Patients` table contains each patients' identification number (PatientID), first name, last name, and email address; with the PatientID as the primary key (PK). The `Doctors` table contains doctors' identification number (DoctorID), first name, last name, and email address as well as their specialization; with the DoctorID as the PK. The `Appointments` table contains all the patients' hospital visit schedules, including appointment identification number (AppointmentID), PatientID, and appointment date. It has the AppointmentID and PatientID as the PK and Foreign key (FK), respectively. Lastly, the `JournalData` table contains medical record created by doctors after patient visit and the entry date. It uses the PatientID and DoctorID as FK to get or link information from both the Patients and the Doctors table. The table show the database structure;
 
-![alt text](image.png)
+|Table A (Patients)|-|Table B (Doctors)|-|Table C (Appointments)|-|Table D (JournalData)|
+|PatientID (PK)|-|DoctorID (PK)|-|AppointmentID (PK)|-|PatientID (FK)|
 
 ### Database  relations
 1:M-relation --> One Doctor can create many JournalData.
